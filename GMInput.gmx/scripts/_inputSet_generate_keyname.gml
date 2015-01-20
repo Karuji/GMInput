@@ -1,0 +1,67 @@
+///_inputSet_generate_keyname(INTERNAL);
+
+//Letters
+keyname[? ord('A')] = "A";
+keyname[? ord('B')] = "B";
+keyname[? ord('C')] = "C";
+keyname[? ord('D')] = "D";
+keyname[? ord('E')] = "E";
+keyname[? ord('F')] = "F";
+keyname[? ord('G')] = "G";
+keyname[? ord('H')] = "H";
+keyname[? ord('I')] = "I";
+keyname[? ord('J')] = "J";
+keyname[? ord('K')] = "K";
+keyname[? ord('L')] = "L";
+keyname[? ord('M')] = "M";
+keyname[? ord('N')] = "N";
+keyname[? ord('O')] = "O";
+keyname[? ord('P')] = "P";
+keyname[? ord('Q')] = "Q";
+keyname[? ord('R')] = "R";
+keyname[? ord('S')] = "S";
+keyname[? ord('T')] = "T";
+keyname[? ord('U')] = "U";
+keyname[? ord('V')] = "V";
+keyname[? ord('W')] = "W";
+keyname[? ord('X')] = "X";
+keyname[? ord('Y')] = "Y";
+keyname[? ord('Z')] = "Z";
+//Numbers
+keyname[? ord('0')] = "0";
+keyname[? ord('1')] = "1";
+keyname[? ord('2')] = "2";
+keyname[? ord('3')] = "3";
+keyname[? ord('4')] = "4";
+keyname[? ord('5')] = "5";
+keyname[? ord('6')] = "6";
+keyname[? ord('7')] = "7";
+keyname[? ord('8')] = "8";
+keyname[? ord('9')] = "9";
+//Other
+keyname[? vk_up]      = "Up";
+keyname[? vk_down]    = "Down";
+keyname[? vk_left]    = "Left";
+keyname[? vk_right]   = "Right";
+keyname[? vk_space]   = "Space";
+keyname[? vk_alt]     = "Alt";
+keyname[? vk_control] = "Control";
+keyname[? vk_shift]   = "Shit";
+keyname[? vk_tab]     = "Tab";
+//Numpad
+keyname[? vk_numpad0]  = "Num 0";
+keyname[? vk_numpad1]  = "Num 1";
+keyname[? vk_numpad2]  = "Num 2";
+keyname[? vk_numpad3]  = "Num 3";
+keyname[? vk_numpad4]  = "Num 4";
+keyname[? vk_numpad5]  = "Num 5";
+keyname[? vk_numpad6]  = "Num 6";
+keyname[? vk_numpad7]  = "Num 7";
+keyname[? vk_numpad8]  = "Num 8";
+keyname[? vk_numpad9]  = "Num 9";
+keyname[? vk_decimal]  = "Num .";
+keyname[? vk_return]   = "Num Return";
+keyname[? vk_add]      = "Num +";
+keyname[? vk_subtract] = "Num -";
+keyname[? vk_multiply] = "Num *";
+keyname[? vk_divide]   = "Num /";
