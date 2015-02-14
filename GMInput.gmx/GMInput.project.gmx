@@ -11,7 +11,6 @@
   <backgrounds name="background"/>
   <paths name="paths"/>
   <scripts name="scripts">
-    <script>scripts\joyButton.gml</script>
     <script>scripts\roomStart.gml</script>
     <scripts name="Input">
       <script>scripts\input_get_key.gml</script>
@@ -29,6 +28,7 @@
       <script>scripts\scr_ds_map_invert.gml</script>
       <script>scripts\input_lefty_flip.gml</script>
       <script>scripts\input_activate_InputSetUser.gml</script>
+      <script>scripts\input_arrow_pressed.gml</script>
       <script>scripts\input_deactivate_InputSetUser.gml</script>
       <script>scripts\input_toggle_InputSetUser.gml</script>
       <scripts name="InputGroup">
@@ -51,6 +51,7 @@
         <script>scripts\_inputSet_generate_psname.gml</script>
         <script>scripts\_inputSet_generate_xbname.gml</script>
         <script>scripts\_inputSet_wrap.gml</script>
+        <script>scripts\_inputSet_key_check.gml</script>
       </scripts>
     </scripts>
   </scripts>

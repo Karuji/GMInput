@@ -7,7 +7,7 @@ var __key  = ds_map_find_first( __map);
 
 for( var i = 0; i < __size; i++)
 {
-    var __val = keymap[? __key];
+    var __val = __map[? __key];
     __temp[? __val] = __key;
     __key = ds_map_find_next( __map, __key);    
 }

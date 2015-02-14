@@ -126,12 +126,21 @@ line_colour = c_black;
         show_debug_message(ord('G'));
     }
     
-    y_selected -= input_get_key_pressed("up");
-    y_selected += input_get_key_pressed("down");
-    y_selected = _inputSet_wrap( y_selected, config_size*2 -1);  
-    
-    x_selected -= input_get_key_pressed("left");
-    x_selected += input_get_key_pressed("right");
+    if( input_arrow_pressed())
+    {
+        y_selected -= keyboard_check_pressed( vk_up);
+        y_selected += keyboard_check_pressed( vk_down);
+        x_selected -= keyboard_check_pressed( vk_left);
+        x_selected += keyboard_check_pressed( vk_right);
+    }
+    else
+    {
+        y_selected -= input_get_key_pressed("up");
+        y_selected += input_get_key_pressed("down");
+        x_selected -= input_get_key_pressed("left");
+        x_selected += input_get_key_pressed("right");
+    }
+    y_selected = _inputSet_wrap( y_selected, config_size*2 -1);
     x_selected = _inputSet_wrap( x_selected, 1);
     
 }
@@ -150,22 +159,20 @@ if( cur_input_state == input_state.input)
         if( keyboard_lastkey != 0)
         {
             show_debug_message(keyboard_lastkey);
-            //if( keyname[? keyboard_lastkey] != undefinded)
             {
                 if( x_selected == 0)
                 {
+                    _inputSet_key_check( Input.keymap, keyboard_lastkey);
                     Input.keymap[? alias_grid[# 0, y_selected]] = keyboard_lastkey;
                 }
                 else
                 {
+                    _inputSet_key_check( Input.keymapalt, keyboard_lastkey);
                     Input.keymapalt[? alias_grid[# 0, y_selected]] = keyboard_lastkey;
                 }
+                
                 _inputSet_generate_grid();
                 cur_input_state = input_state.nav;
-            }
-            //else
-            {
-                //keyboard_lastkey = 0;
             }
         }
     }
@@ -174,6 +181,27 @@ if( cur_input_state == input_state.input)
         var gp_last = input_gamepad_last()
         if( gp_last != 0)
         {
+            if( x_selected == 0)
+            {
+                _inputSet_key_check( Input.gpmap, gp_last);
+                Input.gpmap[? alias_grid[# 0, y_selected]] = gp_last;
+            }
+            else
+            {
+                _inputSet_key_check( Input.gpmapalt, gp_last);
+                Input.gpmapalt[? alias_grid[# 0, y_selected]] = gp_last;
+            }
+            
+            input_gamepad_last_clear();
+            _inputSet_generate_grid();
+            cur_input_state = input_state.nav;
+        }
+    }
+
+}
+
+/*
+
             if( btnname[? gp_last] != undefinded)
             {
                 alias_grid[# x_selected +1, y_selected] = gp_last;
@@ -184,10 +212,6 @@ if( cur_input_state == input_state.input)
             {
                 input_gamepad_last_clear();
             }
-        }
-    }
-
-}
 
 </string>
           </argument>
