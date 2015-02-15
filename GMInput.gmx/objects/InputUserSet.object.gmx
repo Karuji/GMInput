@@ -200,18 +200,6 @@ if( cur_input_state == input_state.input)
 
 }
 
-/*
-
-            if( btnname[? gp_last] != undefinded)
-            {
-                alias_grid[# x_selected +1, y_selected] = gp_last;
-                _inputSet_generate_grid();
-                cur_input_state = input_state.nav;
-            }
-            else
-            {
-                input_gamepad_last_clear();
-            }
 
 </string>
           </argument>
@@ -237,31 +225,7 @@ if( cur_input_state == input_state.input)
             <kind>1</kind>
             <string>if( cur_input_state = input_state.nav)
 {    
-    for( var i = 0; i &lt; config_size*2; i++)
-    {
-        if( i == y_selected)
-        {
-            line_colour = c_blue
-        }
-        else
-        {
-            line_colour = c_black;
-        }
-        
-        for( var j = 0; j &lt; 3; j++)
-        {
-            if( i == y_selected &amp;&amp; j == x_selected +1)
-            {
-                draw_set_colour( c_red);
-            }
-            else
-            {
-                draw_set_colour( line_colour)
-            }
-        
-            draw_text( 32 + j*128, 32 + i*32, alias_grid[# j, i]);
-        }
-    }
+    _inputSet_generate_surf_grid()
 }
 else
 if( cur_input_state = input_state.input)
@@ -283,7 +247,10 @@ if( cur_input_state = input_state.input)
     {
         var config_alias = "button"
     }
-    
+    draw_set_halign(fa_center);
+    draw_set_valign(fa_center);
+    draw_line(room_width/2,0,room_width/2,room_height);
+    draw_line(0,room_height/2,room_width,room_height/2);
     draw_text( room_width / 2, room_height / 2, "Enter new " + alt + config_alias +
              " for " + alias_grid[# 0, y_selected] );
 }

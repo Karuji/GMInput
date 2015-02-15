@@ -52,6 +52,10 @@
         <script>scripts\_inputSet_generate_xbname.gml</script>
         <script>scripts\_inputSet_wrap.gml</script>
         <script>scripts\_inputSet_key_check.gml</script>
+        <script>scripts\_inputSet_generate_surf_grid.gml</script>
+        <script>scripts\inputSet_line_normal.gml</script>
+        <script>scripts\inputSet_line_selected.gml</script>
+        <script>scripts\inputSet_item_selected.gml</script>
       </scripts>
     </scripts>
   </scripts>
