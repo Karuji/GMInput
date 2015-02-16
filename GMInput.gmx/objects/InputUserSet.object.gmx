@@ -58,16 +58,23 @@ x_id = 32;
 x_key = 256;
 x_keyalt = 384
 
+x_start = 32
+x_buffer = 128;
+
 y_start = 32
 y_buffer = 32;
 
 y_selected = 0;
 x_selected = 0;
 
+y_cur = 0;
+
 y_can_move = true;
 wait_time = room_speed / 10;
 
-line_colour = c_black;
+w_surf = 0;
+h_surf = 0;
+cfg_surf = 0;
 
 
 
@@ -224,8 +231,46 @@ if( cur_input_state == input_state.input)
           <argument>
             <kind>1</kind>
             <string>if( cur_input_state = input_state.nav)
-{    
-    _inputSet_generate_surf_grid()
+{
+    if( view_enabled)
+    {
+        w_check = view_wview;
+        h_check = view_hview;
+        h_start = view_yview;
+    }      
+    else
+    {
+        w_check = room_width;
+        h_check = room_height;
+        h_start = 0;
+    }
+    _inputSet_generate_surf_grid();
+    
+    if( h_surf &lt; h_check)
+    {
+        h_pos = h_check/2 - h_surf/2;
+    }
+    else
+    {
+        h_pos = h_check /2 -y_selected * y_buffer;
+        
+        if( y_selected &lt;= config_size)
+        {
+            if( h_pos &gt; h_start + y_start)
+            {
+                h_pos = h_start + y_start;
+            }
+        }
+        else
+        {
+            if( h_pos + h_surf &lt; h_check - y_start)
+            {
+                h_pos = -h_surf + (h_check - y_start)
+            }
+        }
+    }
+    
+    draw_surface( cfg_surf, w_check/2 - w_surf/2, h_pos);
 }
 else
 if( cur_input_state = input_state.input)
