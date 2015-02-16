@@ -5,13 +5,10 @@
   </Configs>
   <NewExtensions/>
   <sounds name="sound"/>
-  <sprites name="sprites">
-    <sprite>sprites\spr</sprite>
-  </sprites>
+  <sprites name="sprites"/>
   <backgrounds name="background"/>
   <paths name="paths"/>
   <scripts name="scripts">
-    <script>scripts\roomStart.gml</script>
     <scripts name="Input">
       <script>scripts\input_get_key.gml</script>
       <script>scripts\input_get_key_pressed.gml</script>
@@ -62,13 +59,16 @@
     </scripts>
   </scripts>
   <objects name="objects">
-    <object>objects\Input</object>
-    <object>objects\test</object>
-    <object>objects\obj</object>
-    <object>objects\InputUserSet</object>
+    <objects name="Input">
+      <object>objects\Input</object>
+      <object>objects\InputUserSet</object>
+      <object>objects\Obj_Input_Test1</object>
+    </objects>
   </objects>
   <rooms name="rooms">
-    <room>rooms\room0</room>
+    <rooms name="Input">
+      <room>rooms\Rm_Input_Test1</room>
+    </rooms>
   </rooms>
   <help>
     <rtf>help.rtf</rtf>
