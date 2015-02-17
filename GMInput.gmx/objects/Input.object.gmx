@@ -4,7 +4,7 @@
   <solid>0</solid>
   <visible>-1</visible>
   <depth>0</depth>
-  <persistent>0</persistent>
+  <persistent>-1</persistent>
   <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
@@ -47,9 +47,12 @@ DEBUG = true;
 //
 // input_alias's use is for assigning new keys with InputUserSet.
 // If you add any new key references you want to also add them
-// to input_alias or the user won't be able to edit them.
+// to input_alias or the user won't be able to edit them!
 // The lines are set up so you can copy and paste and just change the string.
 // Users will see the keys in the order you arrange them here.
+//
+// If you want to add an input that the user cannot edit:
+// Do not add the key to input_alias, and add it to reserved_keys instead.
 //+++++||+++++||+++++||+++++||+++++||+++++||+++++||+++++||+++++||+++++||+++++
 
 input_alias = ds_list_create()
@@ -76,6 +79,8 @@ keymap[? "right"] = ord('D');
 keymap[? "fire1"] = vk_up;
 keymap[? "fire2"] = vk_down;
 keymap[? "bomb"]  = vk_left;
+keymap[? "_conf"] = vk_enter;  // "_" is used to show reserved key
+keymap[? "_cncl"] = vk_escape; // it doesn't affect the programmer, but it's useful reminder
 
 keymapalt = ds_map_create();
 
@@ -112,6 +117,19 @@ gpmapalt = ds_map_create();
 gpmapalt[? "fire1"] = gp_shoulderlb;
 gpmapalt[? "fire2"] = gp_shoulderrb;
 gpmapalt[? "bomb"]  = gp_face2;
+
+//==========================================================================//
+//----------------------------RESERVED KEYS---------------------------------//
+//==========================================================================//
+
+// List of reserved keys
+// These are keys that the user cannot enter new keys
+reserved_keys = ds_list_create();
+i = 0;
+
+reserved_keys[| i++] = vk_enter;
+reserved_keys[| i++] = vk_escape;
+reserved_keys[| i++] = gp_start;
 
 //==========================================================================//
 //------------------------INPUT GROUP STUFF---------------------------------//
@@ -166,6 +184,8 @@ else
 
 enum state{ normal, new_input};
 current_state = state.normal;
+
+persistent = true;
 
 // Variables for lefty flip
 dir_l = ds_list_create();

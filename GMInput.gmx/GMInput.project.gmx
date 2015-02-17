@@ -20,27 +20,10 @@
       <script>scripts\input_get_vertical.gml</script>
       <script>scripts\input_gamepad_last.gml</script>
       <script>scripts\input_gamepad_last_clear.gml</script>
-      <script>scripts\input_config_save.gml</script>
-      <script>scripts\input_config_load.gml</script>
-      <script>scripts\scr_ds_map_invert.gml</script>
       <script>scripts\input_lefty_flip.gml</script>
       <script>scripts\input_activate_InputSetUser.gml</script>
-      <script>scripts\input_arrow_pressed.gml</script>
       <script>scripts\input_deactivate_InputSetUser.gml</script>
       <script>scripts\input_toggle_InputSetUser.gml</script>
-      <scripts name="InputGroup">
-        <script>scripts\input_group_make.gml</script>
-        <script>scripts\input_group_get.gml</script>
-        <script>scripts\input_group_get_state.gml</script>
-        <script>scripts\input_group_get_button.gml</script>
-        <script>scripts\input_group_get_pressed.gml</script>
-        <script>scripts\input_group_get_released.gml</script>
-        <script>scripts\input_group_wrap.gml</script>
-        <script>scripts\_input_group_make.gml</script>
-        <script>scripts\_input_group_make_button.gml</script>
-        <script>scripts\_input_group_make_pressed.gml</script>
-        <script>scripts\_input_group_make_released.gml</script>
-      </scripts>
       <scripts name="InputUserSet">
         <script>scripts\inputSet_line_normal.gml</script>
         <script>scripts\inputSet_line_selected.gml</script>
@@ -55,6 +38,28 @@
           <script>scripts\_inputSet_generate_grid.gml</script>
           <script>scripts\_inputSet_generate_surf_grid.gml</script>
         </scripts>
+      </scripts>
+      <scripts name="InputGroup">
+        <script>scripts\input_group_make.gml</script>
+        <script>scripts\input_group_get.gml</script>
+        <script>scripts\input_group_get_state.gml</script>
+        <script>scripts\input_group_get_button.gml</script>
+        <script>scripts\input_group_get_pressed.gml</script>
+        <script>scripts\input_group_get_released.gml</script>
+        <scripts name="Internal">
+          <script>scripts\_input_group_make.gml</script>
+          <script>scripts\_input_group_make_button.gml</script>
+          <script>scripts\_input_group_make_pressed.gml</script>
+          <script>scripts\_input_group_make_released.gml</script>
+          <script>scripts\input_group_wrap.gml</script>
+        </scripts>
+      </scripts>
+      <scripts name="Internal">
+        <script>scripts\input_config_save.gml</script>
+        <script>scripts\input_config_load.gml</script>
+        <script>scripts\input_is_reserved_key.gml</script>
+        <script>scripts\scr_ds_map_invert.gml</script>
+        <script>scripts\input_arrow_pressed.gml</script>
       </scripts>
     </scripts>
   </scripts>
