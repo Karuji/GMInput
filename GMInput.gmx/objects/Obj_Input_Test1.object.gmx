@@ -43,6 +43,55 @@ spd = 4;
         </arguments>
       </action>
     </event>
+    <event eventtype="2" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>input_activate_InputSetUser();
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="3" enumb="1">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>if(input_get_key_pressed( "_escp"))
+{
+    alarm[0] = 1;
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
     <event eventtype="3" enumb="0">
       <action>
         <libid>1</libid>
@@ -60,15 +109,19 @@ spd = 4;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if( keyboard_check_pressed( vk_delete))
+            <string>if( instance_exists( InputUserSet))
 {
-    active = !active;
-    visible = !visible;
-    input_toggle_InputSetUser();
+    active = false;
+    visible = false;
+}
+else
+{
+    active = true;
+    visible = true;
 }
 
 if( active)
-{
+{    
     if( input_is_axis())
     {
         var _ang = degtorad( input_axis_dir());
@@ -76,19 +129,20 @@ if( active)
         y += spd*sin(_ang);
     }
     else
-    if( input_is_directional())
+    if( input_group_get_button("dir_x") != 0 || input_group_get_button("dir_y") != 0)
+    {
+        var _ang = arctan2( input_group_get_button("dir_y"), input_group_get_button("dir_x"));
+        x += spd*cos(_ang);
+        y += spd*sin(_ang);
+    }
+    
+}
+/*if( input_is_directional())
     {
         var _ang = arctan2( input_get_vertical(), input_get_horizontal());
         x += spd*cos(_ang);
         y += spd*sin(_ang);
     }
-}
-/*if( input_group_get_button("dir_x") != 0 || input_group_get_button("dir_y") != 0)
-{
-    var _ang = arctan2( input_group_get_button("dir_y"), input_group_get_button("dir_x"));
-    x += spd*cos(_ang);
-    y += spd*sin(_ang);
-}
 </string>
           </argument>
         </arguments>

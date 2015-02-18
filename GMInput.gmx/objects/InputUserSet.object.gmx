@@ -76,6 +76,8 @@ w_surf = 0;
 h_surf = 0;
 cfg_surf = 0;
 
+can_close = false;
+alarm[0] = 1;
 
 
 </string>
@@ -100,7 +102,7 @@ cfg_surf = 0;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>y_can_move = true;
+            <string>can_close = true;
 </string>
           </argument>
         </arguments>
@@ -125,15 +127,19 @@ cfg_surf = 0;
             <kind>1</kind>
             <string>if( cur_input_state == input_state.nav)
 {
-    if( keyboard_check_pressed( vk_enter))
+    if( input_get_key_pressed( "_escp") &amp;&amp; can_close)
+    {
+        input_deactivate_InputSetUser();
+    }
+    
+    if( input_get_key_pressed("_conf"))
     {
         cur_input_state = input_state.input;
         keyboard_lastkey = 0;
         input_gamepad_last_clear();
-        show_debug_message(ord('G'));
     }
     
-    if( input_arrow_pressed())
+    if( _input_arrow_pressed())
     {
         y_selected -= keyboard_check_pressed( vk_up);
         y_selected += keyboard_check_pressed( vk_down);
@@ -142,10 +148,10 @@ cfg_surf = 0;
     }
     else
     {
-        y_selected -= input_get_key_pressed("up");
-        y_selected += input_get_key_pressed("down");
-        x_selected -= input_get_key_pressed("left");
-        x_selected += input_get_key_pressed("right");
+        y_selected -= input_dir_pressed("up");
+        y_selected += input_dir_pressed("down");
+        x_selected -= input_dir_pressed("left");
+        x_selected += input_dir_pressed("right");
     }
     y_selected = _inputSet_wrap( y_selected, config_size*2 -1);
     x_selected = _inputSet_wrap( x_selected, 1);
@@ -155,7 +161,7 @@ else
 if( cur_input_state == input_state.input)
 {
     
-    if( keyboard_check_pressed( vk_escape))
+    if( input_get_key_pressed( "_escp"))
     {
         cur_input_state = input_state.nav;
     }
@@ -165,7 +171,6 @@ if( cur_input_state == input_state.input)
     {
         if( keyboard_lastkey != 0)
         {
-            show_debug_message(keyboard_lastkey);
             {
                 if( x_selected == 0)
                 {

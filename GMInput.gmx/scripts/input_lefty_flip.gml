@@ -1,7 +1,7 @@
 ///input_lefty_flip()
 with( Input)
 {
-    var __inverse = scr_ds_map_invert( keymap);    
+    var __inverse = _input_ds_map_invert( keymap);    
     var __size = ds_list_size( dir_l);
     
     for( var i = 0; i < __size; i++)

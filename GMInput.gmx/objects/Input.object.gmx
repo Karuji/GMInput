@@ -80,7 +80,7 @@ keymap[? "fire1"] = vk_up;
 keymap[? "fire2"] = vk_down;
 keymap[? "bomb"]  = vk_left;
 keymap[? "_conf"] = vk_enter;  // "_" is used to show reserved key
-keymap[? "_cncl"] = vk_escape; // it doesn't affect the programmer, but it's useful reminder
+keymap[? "_escp"] = vk_escape; // it doesn't affect the programmer, but it's useful reminder
 
 keymapalt = ds_map_create();
 
@@ -94,14 +94,6 @@ keymapalt[? "bomb"]  = vk_right;
 //---------------------CONTROLLER STUFF-------------------------------------//
 //==========================================================================//
 
-gp_count = 0;
-gp_active = ds_list_create();
-
-for (var i = 0; i &lt; 4; i++;)
-{
-    gpad[i] = noone;
-}
-
 gpmap = ds_map_create();
 
 gpmap[? "up"]    = gp_padu;
@@ -111,12 +103,28 @@ gpmap[? "right"] = gp_padr;
 gpmap[? "fire1"] = gp_shoulderl;
 gpmap[? "fire2"] = gp_shoulderr;
 gpmap[? "bomb"]  = gp_face1;
+gpmap[? "_escp"] = gp_start;
+gpmap[? "_conf"] = gp_face1;
 
 gpmapalt = ds_map_create();
 
 gpmapalt[? "fire1"] = gp_shoulderlb;
 gpmapalt[? "fire2"] = gp_shoulderrb;
 gpmapalt[? "bomb"]  = gp_face2;
+
+gp_count = 0;
+gp_active = ds_list_create();
+
+// Backend controller stuff
+
+for (var i = 0; i &lt; 4; i++;)
+{
+    gpad[i] = noone;
+    gp_axislh_last[i] = 0;
+    gp_axislv_last[i] = 0;
+    gp_axisrh_last[i] = 0;
+    gp_axisrv_last[i] = 0;
+}
 
 //==========================================================================//
 //----------------------------RESERVED KEYS---------------------------------//
@@ -157,7 +165,7 @@ input_group_make( "dir_y", "up", "down", true, true, true);
 config_default = "DefaultInputConfig.json";
 config         = "InputConfig.json"
 
-input_config_save( config_default);
+_input_config_save( config_default);
 
 if( !DEBUG)
 {
@@ -167,7 +175,7 @@ if( !DEBUG)
     }
     else
     {
-        input_config_load( config);
+        _input_config_load( config);
     }
 }
 else
@@ -204,6 +212,16 @@ dir_r[| i++] = vk_down;
 dir_r[| i++] = vk_left;
 dir_r[| i++] = vk_right;
 
+// Variables for analogue stick states
+axis_maps = ds_map_create();
+
+axis_last = ds_map_create();
+
+axis_last[? gp_axislh] = gp_axislh_last;
+axis_last[? gp_axislv] = gp_axislv_last;
+axis_last[? gp_axisrh] = gp_axisrh_last;
+axis_last[? gp_axisrv] = gp_axisrv_last;
+
 // Variables for last gamepad input
 for( var i = 0; i &lt; 4; i++)
 {
@@ -228,6 +246,38 @@ gp_btns[| i++] = gp_select;
 gp_btns[| i++] = gp_start;
 gp_btns[| i++] = gp_stickl;
 gp_btns[| i++] = gp_stickr;
+
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="3" enumb="2">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>for( var int = 0; int &lt; gp_count; int++)
+{
+    var i =  gp_active[| int];
+    
+    gp_axislh_last[i] = gamepad_axis_value( i, gp_axislh);
+    gp_axislv_last[i] = gamepad_axis_value( i, gp_axislv);
+    gp_axisrh_last[i] = gamepad_axis_value( i, gp_axisrh);
+    gp_axisrv_last[i] = gamepad_axis_value( i, gp_axisrv);
+}
 
 </string>
           </argument>
@@ -311,6 +361,37 @@ for( var i = 0; i &lt; gp_count; i++)
     }
 }
 
+for( var i = 0; i &lt; gp_count; i++)
+{
+    var __axis = axis_maps[? gp_active[| i]];
+    
+    if( __axis[? "pressed"])
+    {
+        __axis[? "pressed"] = false;
+    }
+    if( __axis[? "released"])
+    {
+        __axis[? "released"] = false;
+    }
+    
+    if( __axis[? "check"])
+    {
+        if( !input_is_axis( "left", gp_active[| i]))
+        {
+            __axis[? "check"] = false;
+            __axis[? "released"] = true;
+        }
+    }
+    else
+    {
+        if( input_is_axis( "left", gp_active[| i]))
+        {
+            __axis[? "check"] = true;
+            __axis[? "pressed"] = true;
+        }
+    }
+}
+
 </string>
           </argument>
         </arguments>
@@ -336,18 +417,12 @@ for( var i = 0; i &lt; gp_count; i++)
             <string>switch(async_load[? "event_type"])             // Parse the async_load map to see which event has been triggered
 {
 case "gamepad discovered":                     // A game pad has been discovered
-    var pad = async_load[? "pad_index"];       // Get the pad index value from the async_load map
-    gamepad_set_axis_deadzone(pad, 0.25);       // Set the "deadzone" for the axis
-    gamepad_set_button_threshold(pad, 0.1);    // Set the "threshold" for the triggers
-    gp_count++;
-    ds_list_add( gp_active, pad);
-    gpad[pad] = pad;
+    var _pad = async_load[? "pad_index"];       // Get the pad index value from the async_load map
+    _input_gamepad_connect( _pad);
     break;
 case "gamepad lost":                           // Gamepad has been removed or otherwise disabled
-    var pad = async_load[? "pad_index"];       // Get the pad index
-    gp_count--;
-    ds_list_delete( gp_active, ds_list_find_index( gp_active, pad));
-    gpad[pad] = noone;
+    var _pad = async_load[? "pad_index"];       // Get the pad index
+    _input_gamepad_disconnect( _pad);
     break;
 }
 </string>

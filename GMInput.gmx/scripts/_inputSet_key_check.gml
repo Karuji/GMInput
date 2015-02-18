@@ -2,9 +2,9 @@
 
 var __map = argument0;
 var __btn = argument1;
-if( !input_is_reserved_key( __btn))
+if( !_input_is_reserved_key( __btn))
 {
-    var __inv = scr_ds_map_invert( __map);
+    var __inv = _input_ds_map_invert( __map);
     if( __inv[? __btn] != undefined)
     {
         __map[? __inv[? __btn]] = undefined;

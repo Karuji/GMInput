@@ -16,6 +16,12 @@
       <script>scripts\input_is_axis.gml</script>
       <script>scripts\input_is_directional.gml</script>
       <script>scripts\input_axis_dir.gml</script>
+      <script>scripts\input_axis_check.gml</script>
+      <script>scripts\input_axis_pressed.gml</script>
+      <script>scripts\input_axis_released.gml</script>
+      <script>scripts\input_dir_check.gml</script>
+      <script>scripts\input_dir_pressed.gml</script>
+      <script>scripts\input_dir_released.gml</script>
       <script>scripts\input_get_horizontal.gml</script>
       <script>scripts\input_get_vertical.gml</script>
       <script>scripts\input_gamepad_last.gml</script>
@@ -55,11 +61,14 @@
         </scripts>
       </scripts>
       <scripts name="Internal">
-        <script>scripts\input_config_save.gml</script>
-        <script>scripts\input_config_load.gml</script>
-        <script>scripts\input_is_reserved_key.gml</script>
-        <script>scripts\scr_ds_map_invert.gml</script>
-        <script>scripts\input_arrow_pressed.gml</script>
+        <script>scripts\_input_config_save.gml</script>
+        <script>scripts\_input_config_load.gml</script>
+        <script>scripts\_input_is_reserved_key.gml</script>
+        <script>scripts\_input_ds_map_invert.gml</script>
+        <script>scripts\_input_arrow_pressed.gml</script>
+        <script>scripts\_input_gamepad_connect.gml</script>
+        <script>scripts\_input_gamepad_disconnect.gml</script>
+        <script>scripts\_input_unit_dir.gml</script>
       </scripts>
     </scripts>
   </scripts>

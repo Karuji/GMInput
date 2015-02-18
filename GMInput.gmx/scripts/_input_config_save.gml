@@ -1,4 +1,4 @@
-///input_config_save(filename)
+///_input_config_save(filename)
 with(Input)
 {
     var __file = file_text_open_write( argument0);

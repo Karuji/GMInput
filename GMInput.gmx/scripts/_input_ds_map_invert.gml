@@ -1,4 +1,4 @@
-///scr_ds_map_invert(ds_map)
+///_scr_ds_map_invert(ds_map)
 
 var __map  = argument0;
 var __temp = ds_map_create();
