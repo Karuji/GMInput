@@ -27,7 +27,7 @@ with(Input)
                     __button = gpmapalt[? __str];
                     if( __button != undefined)
                     {
-                        result = gamepad_button_check_pressed( __pad, __button);
+                        result = gamepad_button_check_released( __pad, __button);
                     }
                 }
         }
