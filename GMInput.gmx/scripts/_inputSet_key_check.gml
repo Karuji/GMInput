@@ -1,15 +1,13 @@
-///_inputSet_key_check(ds_map,key)
+///_inputSet_key_check(key,ds_map,ds_map_alt)
 
-var __map = argument0;
-var __btn = argument1;
+var __btn = argument0;
+var __map = argument1;
+var __alt = argument2;
+
 if( !_input_is_reserved_key( __btn))
 {
-    var __inv = _input_ds_map_invert( __map);
-    if( __inv[? __btn] != undefined)
-    {
-        __map[? __inv[? __btn]] = undefined;
-    }
-    ds_map_destroy( __inv);
+    _inputSet_key_clean( __btn, __map);
+    _inputSet_key_clean( __btn, __alt);
     return true;
 }
 return false;

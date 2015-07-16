@@ -43,6 +43,7 @@
           <script>scripts\_inputSet_generate_keyname.gml</script>
           <script>scripts\_inputSet_generate_grid.gml</script>
           <script>scripts\_inputSet_generate_surf_grid.gml</script>
+          <script>scripts\_inputSet_key_clean.gml</script>
         </scripts>
       </scripts>
       <scripts name="InputGroup">

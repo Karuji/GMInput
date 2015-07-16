@@ -171,25 +171,23 @@ if( cur_input_state == input_state.input)
     {
         if( keyboard_lastkey != 0)
         {
+            if( x_selected == 0)
             {
-                if( x_selected == 0)
+                if( _inputSet_key_check( keyboard_lastkey, Input.keymap, Input.keymapalt))
                 {
-                    if( _inputSet_key_check( Input.keymap, keyboard_lastkey))
-                    {
-                        Input.keymap[? alias_grid[# 0, y_selected]] = keyboard_lastkey;
-                    }
+                    Input.keymap[? alias_grid[# 0, y_selected]] = keyboard_lastkey;
                 }
-                else
-                {
-                    if( _inputSet_key_check( Input.keymapalt, keyboard_lastkey))
-                    {
-                        Input.keymapalt[? alias_grid[# 0, y_selected]] = keyboard_lastkey;
-                    }
-                }
-                
-                _inputSet_generate_grid();
-                cur_input_state = input_state.nav;
             }
+            else
+            {
+                if( _inputSet_key_check( keyboard_lastkey, Input.keymap, Input.keymapalt))
+                {
+                    Input.keymapalt[? alias_grid[# 0, y_selected]] = keyboard_lastkey;
+                }
+            }
+            
+            _inputSet_generate_grid();
+            cur_input_state = input_state.nav;
         }
     }
     else
@@ -199,14 +197,14 @@ if( cur_input_state == input_state.input)
         {
             if( x_selected == 0)
             {
-                if( _inputSet_key_check( Input.gpmap, gp_last))
+                if( _inputSet_key_check( gp_last, Input.gpmap, Input.gpmapalt))
                 {
                     Input.gpmap[? alias_grid[# 0, y_selected]] = gp_last;
                 }
             }
             else
             {
-                if( _inputSet_key_check( Input.gpmapalt, gp_last))
+                if( _inputSet_key_check( gp_last, Input.gpmap, Input.gpmapalt))
                 {
                     Input.gpmapalt[? alias_grid[# 0, y_selected]] = gp_last;
                 }
